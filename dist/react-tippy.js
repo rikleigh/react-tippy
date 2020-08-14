@@ -16,9 +16,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-/******/
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -119,12 +119,11 @@ var Selectors = exports.Selectors = {
   ARROW: '[x-arrow]',
   TOOLTIPPED_EL: '[data-tooltipped]',
   CONTROLLER: '[data-tippy-controller]'
-};
 
-/**
-* The default settings applied to each instance
-*/
-var Defaults = exports.Defaults = {
+  /**
+  * The default settings applied to each instance
+  */
+};var Defaults = exports.Defaults = {
   html: false,
   position: 'top',
   animation: 'shift',
@@ -159,13 +158,12 @@ var Defaults = exports.Defaults = {
   popperOptions: {},
   open: undefined,
   onRequestClose: function onRequestClose() {}
-};
 
-/**
-* The keys of the defaults object for reducing down into a new object
-* Used in `getIndividualSettings()`
-*/
-var DefaultsKeys = exports.DefaultsKeys = Browser.SUPPORTED && Object.keys(Defaults);
+  /**
+  * The keys of the defaults object for reducing down into a new object
+  * Used in `getIndividualSettings()`
+  */
+};var DefaultsKeys = exports.DefaultsKeys = Browser.SUPPORTED && Object.keys(Defaults);
 
 /***/ }),
 /* 1 */
@@ -1123,12 +1121,12 @@ var _getOffsetDistanceInPx2 = _interopRequireDefault(_getOffsetDistanceInPx);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
-* Creates a popper element then returns it
-* @param {Number} id - the popper id
-* @param {String} title - the tooltip's `title` attribute
-* @param {Object} settings - individual settings
-* @return {Element} - the popper element
-*/
+ * Creates a popper element then returns it
+ * @param {Number} id - the popper id
+ * @param {String} title - the tooltip's `title` attribute
+ * @param {Object} settings - individual settings
+ * @return {Element} - the popper element
+ */
 function createPopperElement(id, title, settings) {
   var position = settings.position,
       distance = settings.distance,
@@ -1144,67 +1142,67 @@ function createPopperElement(id, title, settings) {
       interactive = settings.interactive;
 
 
-  var popper = document.createElement('div');
-  popper.setAttribute('class', 'tippy-popper');
-  popper.setAttribute('role', 'tooltip');
-  popper.setAttribute('aria-hidden', 'true');
-  popper.setAttribute('id', 'tippy-tooltip-' + id);
+  var popper = document.createElement("div");
+  popper.setAttribute("class", "tippy-popper");
+  popper.setAttribute("role", "tooltip");
+  popper.setAttribute("aria-hidden", "true");
+  popper.setAttribute("id", "tippy-tooltip-" + id);
   popper.style.zIndex = zIndex;
 
-  var tooltip = document.createElement('div');
-  tooltip.setAttribute('class', 'tippy-tooltip tippy-tooltip--' + size + ' leave');
-  tooltip.setAttribute('data-animation', animation);
+  var tooltip = document.createElement("div");
+  tooltip.setAttribute("class", "tippy-tooltip tippy-tooltip--" + size + " leave");
+  tooltip.setAttribute("data-animation", animation);
 
-  theme.split(' ').forEach(function (t) {
-    tooltip.classList.add(t + '-theme');
+  theme.split(" ").forEach(function (t) {
+    tooltip.classList.add(t + "-theme");
   });
 
   if (arrow) {
     // Add an arrow
-    var _arrow = document.createElement('div');
-    _arrow.setAttribute('class', 'arrow-' + arrowSize);
-    _arrow.setAttribute('x-arrow', '');
+    var _arrow = document.createElement("div");
+    _arrow.setAttribute("class", "arrow-" + arrowSize);
+    _arrow.setAttribute("x-arrow", "");
     tooltip.appendChild(_arrow);
   }
 
   if (animateFill) {
     // Create animateFill circle element for animation
-    tooltip.setAttribute('data-animatefill', '');
-    var circle = document.createElement('div');
-    circle.setAttribute('class', 'leave');
-    circle.setAttribute('x-circle', '');
+    tooltip.setAttribute("data-animatefill", "");
+    var circle = document.createElement("div");
+    circle.setAttribute("class", "leave");
+    circle.setAttribute("x-circle", "");
     tooltip.appendChild(circle);
   }
 
   if (inertia) {
     // Change transition timing function cubic bezier
-    tooltip.setAttribute('data-inertia', '');
+    tooltip.setAttribute("data-inertia", "");
   }
 
   if (interactive) {
-    tooltip.setAttribute('data-interactive', '');
+    tooltip.setAttribute("data-interactive", "");
   }
 
   // Tooltip content (text or HTML)
-  var content = document.createElement('div');
-  content.setAttribute('class', 'tippy-tooltip-content');
+  var content = document.createElement("div");
+  content.setAttribute("class", "tippy-tooltip-content");
 
   if (html) {
     var templateId = void 0;
 
     if (html instanceof Element) {
       content.appendChild(html);
-      templateId = '#' + html.id || 'tippy-html-template';
+      templateId = "#" + html.id || "tippy-html-template";
     } else {
-      content.innerHTML = document.getElementById(html.replace('#', '')).innerHTML;
+      content.innerHTML = document.getElementById(html.replace("#", "")).innerHTML;
       templateId = html;
     }
 
-    popper.classList.add('html-template');
-    interactive && popper.setAttribute('tabindex', '-1');
-    tooltip.setAttribute('data-template-id', templateId);
+    popper.classList.add("html-template");
+    interactive && popper.setAttribute("tabindex", "-1");
+    tooltip.setAttribute("data-template-id", templateId);
   } else {
-    content.innerHTML = title;
+    content.textContent = title;
   }
 
   // Init distance. Further updates are made in the popper instance's `onUpdate()` method
