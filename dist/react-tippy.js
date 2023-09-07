@@ -2355,7 +2355,9 @@ var Tippy = function () {
           // Prevents shown() from firing more than once from early transition cancellations
           data._onShownFired = true;
 
-          _this.callbacks.shown.call(popper);
+          if (typeof _this.callbacks.shown === 'function') {
+            _this.callbacks.shown.call(popper);
+          }
         });
       });
     }
